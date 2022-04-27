@@ -23,6 +23,8 @@ const FormularioApp = ({tareas, cambiarTareas}) => {
         }
     }
 
+    console.log("dasd")
+
     return ( 
         <Formulario action="" onSubmit={handleSubmit}>
             <div className="l-container l-container--flex">
