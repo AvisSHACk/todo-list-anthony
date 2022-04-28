@@ -14,8 +14,11 @@ const Item = styled.li`
     font-size: 1.2rem;
 `
 
-const ButtonDelete = styled.button`
+const ContenedorButtons = styled.div`
     margin-left:auto;
+`
+
+const ButtonDelete = styled.button`
     font-size: 1.6rem;
     color:#b00020;
     cursor: pointer;
@@ -30,4 +33,4 @@ const Square = styled.div`
     cursor: pointer;
 `
 
-export { Contenedor, Item, ButtonDelete, Square};
+export { Contenedor, Item, ButtonDelete, Square, ContenedorButtons};
