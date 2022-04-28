@@ -59,7 +59,7 @@ const Tarea = ({tarea}) => {
     }
     
     if(editando){
-        window.addEventListener('click', removeEditando);
+        // window.addEventListener('click', removeEditando);
     }
     
     return ( 
