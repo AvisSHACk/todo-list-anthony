@@ -10,7 +10,6 @@ const Tarea = ({tarea}) => {
 
     const completar = (tarea) => {
         const usuarios = doc(db, 'tareas', tarea.id);
-        //Updatedoc o setdoc funcionan
         updateDoc(usuarios, 
             { 
                 
