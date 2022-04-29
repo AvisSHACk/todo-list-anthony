@@ -44,22 +44,26 @@ const Tarea = ({tarea}) => {
         deleteDoc(doc(db, "tareas", id));
     }
 
-    /*RemoveEditando es una funcion que sirve para que cuando el usuario de click en cualquier lugar fuera del formulario donde se
-    edita la  tarea, este formulario se cierre*/
+    // /*RemoveEditando es una funcion que sirve para que cuando el usuario de click en cualquier lugar fuera del formulario donde se
+    // edita la  tarea, este formulario se cierre*/
 
-    const removeEditando = (e) => {
-        if(e.target.tagName !== 'path' 
-        && e.target !== document.getElementById("formulario-editar-tarea") 
-        && e.target !== document.getElementById("input-nueva-tarea")
-        && e.target !== document.getElementById("button-nueva-tarea")) {
-            cambiarEditando(!editando);
-            window.removeEventListener('click', removeEditando);
-        };
-    }
+    // const removeEditando = (e) => {
+    //     if(e.target.tagName !== 'path' 
+    //     && e.target !== document.getElementById("formulario-editar-tarea") 
+    //     && e.target !== document.getElementById("input-nueva-tarea")
+    //     && e.target !== document.getElementById("button-nueva-tarea")) {
+    //         cambiarEditando(!editando);
+    //         window.removeEventListener('click', removeEditando);
+    //     };
+
+    //     console.log("dasds")
+    // }
     
-    if(editando){
-        window.addEventListener('click', removeEditando);
-    }
+    // if(editando){
+    //     window.addEventListener('click', removeEditando);
+    // }
+
+    console.log("d")
     
     return ( 
         
