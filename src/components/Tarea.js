@@ -1,9 +1,8 @@
 import {useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheckSquare, faSquare, faCircleMinus} from '@fortawesome/free-solid-svg-icons'
-import {Item, ButtonDelete, Square} from "../elements/ElementosItem";
+import { faCheckSquare, faSquare, faTrashCan, faPencil, faCircleXmark} from '@fortawesome/free-solid-svg-icons'
+import {ContenedorButtons, Item, ButtonDelete, ButtonEditar, Square, FormularioEditar, InputEditar, ButtonEditarForm, ButtonCancelar} from "../elements/ElementosItem";
 import { db, doc, updateDoc, deleteDoc } from "../firebase/firebase.config";
-import { ContenedorButtons } from "../elements/ElementosItem";
 const Tarea = ({tarea}) => {
     const [editando, cambiarEditando] = useState(false);
     const [newTarea, cambiarNewTarea] = useState('');
@@ -35,13 +34,16 @@ const Tarea = ({tarea}) => {
 
     }
 
-    const editar = (tarea) => {
-        cambiarEditando(!editando);
-        cambiarNewTarea(tarea.nombre);
-    }
-
-    const eliminar = (id) => {
-        deleteDoc(doc(db, "tareas", id));
+    const acciones = (e, tarea) => {
+        if(e.target.id === 'editar') {
+            cambiarEditando(!editando);
+            cambiarNewTarea(tarea.nombre);
+        } else if (e.target.id === 'eliminar'){
+            deleteDoc(doc(db, "tareas", tarea.id));
+        } else if (e.target.id === 'cancelar'){
+            cambiarEditando(!editando);
+        }
+        
     }
 
     // /*RemoveEditando es una funcion que sirve para que cuando el usuario de click en cualquier lugar fuera del formulario donde se
@@ -62,8 +64,6 @@ const Tarea = ({tarea}) => {
     // if(editando){
     //     window.addEventListener('click', removeEditando);
     // }
-
-    console.log("d")
     
     return ( 
         
@@ -75,15 +75,19 @@ const Tarea = ({tarea}) => {
                     />
                 </Square>
                 {editando ? 
-                    <form id="formulario-editar-tarea" action="" onSubmit={(e) => guardarTareaNueva(e, tarea)}>
-                        <input type="text" name="" id="input-nueva-tarea" value={newTarea} onChange={(e) => cambiarNewTarea(e.target.value)}/>
-                        <button id="button-nueva-tarea">Actualizar</button>
-                    </form>
+                    <FormularioEditar id="formulario-editar-tarea" action="" onSubmit={(e) => guardarTareaNueva(e, tarea)}>
+                        <InputEditar type="text" name="" id="input-nueva-tarea" value={newTarea} onChange={(e) => cambiarNewTarea(e.target.value)}/>
+                        <ButtonEditarForm id="button-nueva-tarea">Actualizar</ButtonEditarForm>
+                    </FormularioEditar>
                 :
                 tarea.nombre}
-                <ContenedorButtons>
-                    <ButtonDelete title="Editar" id="editar" onClick={() => editar(tarea)}><FontAwesomeIcon icon={faCircleMinus} /></ButtonDelete>
-                    <ButtonDelete title="Eliminar" onClick={() => eliminar(tarea.id)}><FontAwesomeIcon icon={faCircleMinus} /></ButtonDelete>
+                <ContenedorButtons onClick={(e) => acciones(e, tarea)}>
+                    {!editando ?
+                        <ButtonEditar title="Editar" ><FontAwesomeIcon id="editar" icon={faPencil} /></ButtonEditar>
+                    :
+                        <ButtonCancelar title="Cancelar" ><FontAwesomeIcon id="cancelar" icon={faCircleXmark} /></ButtonCancelar>
+                    }
+                    <ButtonDelete title="Eliminar" ><FontAwesomeIcon id="eliminar" icon={faTrashCan} /></ButtonDelete>
                 </ContenedorButtons>
             </Item>
      );

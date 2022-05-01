@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { db, collection, addDoc } from "../firebase/firebase.config";
-import {Formulario, Input, Button} from "../elements/ElementosFormulario";
+import {Formulario, Input, Button, Header} from "../elements/ElementosFormulario";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 const FormularioApp = ({tareas, cambiarTareas}) => {
@@ -23,22 +23,26 @@ const FormularioApp = ({tareas, cambiarTareas}) => {
         }
     }
 
-    return ( 
-        <Formulario action="" onSubmit={handleSubmit}>
-            <div className="l-container l-container--flex">
-                <Input 
-                    type="text" 
-                    name="tarea" 
-                    id="tarea" 
-                    value={tarea} 
-                    onChange={(e) => cambiarTarea(e.target.value)}
-                    placeholder="Agrega una tarea"
-                />
-                <Button>
-                    <FontAwesomeIcon icon={faCirclePlus} />
-                </Button>
-            </div>
-        </Formulario>
+    return (
+        <>
+            <Header>Todo List</Header>
+            <Formulario action="" onSubmit={handleSubmit}>
+                <div className="l-container l-container--flex">
+                    <Input 
+                        type="text" 
+                        name="tarea" 
+                        id="tarea" 
+                        value={tarea} 
+                        onChange={(e) => cambiarTarea(e.target.value)}
+                        placeholder="Agrega una tarea"
+                    />
+                    <Button>
+                        <FontAwesomeIcon icon={faCirclePlus} />
+                    </Button>
+                </div>
+            </Formulario>
+        </>
+        
     );
 }
  
