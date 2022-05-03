@@ -3,6 +3,7 @@ import { db, collection, onSnapshot } from "../firebase/firebase.config";
 import {Contenedor} from "../elements/ElementosItem";
 import ButtonFiltrar from "../elements/ElementosFiltrar";
 import Tarea from "./Tarea";
+import Mensaje from "../elements/Mensaje";
 
 const ListaTareas = () => {
     const [tareas, cambiarTareas] = useState([]);
@@ -44,7 +45,7 @@ const ListaTareas = () => {
                 ))}
 
                 {!cargando && completados.length === 0 &&
-                    <p>No hay tareas por mostrar</p>
+                    <Mensaje>No hay tareas por mostrar</Mensaje>
                 }
             </Contenedor> 
         </div>

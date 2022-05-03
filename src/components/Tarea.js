@@ -34,15 +34,17 @@ const Tarea = ({tarea}) => {
 
     }
 
-    const acciones = (e, tarea) => {
-        if(e.target.id === 'editar') {
+    const acciones = (accion, tarea) => {
+        if(accion === 'editar') {
             cambiarEditando(!editando);
             cambiarNewTarea(tarea.nombre);
-        } else if (e.target.id === 'eliminar'){
+        } else if (accion === 'eliminar'){
             deleteDoc(doc(db, "tareas", tarea.id));
-        } else if (e.target.id === 'cancelar'){
+        } else if (accion === 'cancelar'){
             cambiarEditando(!editando);
         }
+
+        
         
     }
 
@@ -81,13 +83,19 @@ const Tarea = ({tarea}) => {
                     </FormularioEditar>
                 :
                 tarea.nombre}
-                <ContenedorButtons onClick={(e) => acciones(e, tarea)}>
+                <ContenedorButtons>
                     {!editando ?
-                        <ButtonEditar title="Editar" ><FontAwesomeIcon id="editar" icon={faPencil} /></ButtonEditar>
+                        <ButtonEditar title="Editar"  >
+                            <FontAwesomeIcon id="editar" onClick={() => acciones('editar', tarea)} icon={faPencil} />
+                        </ButtonEditar>
                     :
-                        <ButtonCancelar title="Cancelar" ><FontAwesomeIcon id="cancelar" icon={faCircleXmark} /></ButtonCancelar>
+                        <ButtonCancelar title="Cancelar" >
+                            <FontAwesomeIcon id="cancelar" onClick={() => acciones('cancelar', tarea)} icon={faCircleXmark} />
+                        </ButtonCancelar>
                     }
-                    <ButtonDelete title="Eliminar" ><FontAwesomeIcon id="eliminar" icon={faTrashCan} /></ButtonDelete>
+                    <ButtonDelete title="Eliminar" >
+                        <FontAwesomeIcon id="eliminar" onClick={() => acciones('eliminar', tarea)} icon={faTrashCan} />
+                    </ButtonDelete>
                 </ContenedorButtons>
             </Item>
      );
